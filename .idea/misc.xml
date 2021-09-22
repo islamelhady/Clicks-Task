@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/islam/Desktop/News/app/src/main/res/drawable/bg_rounded_top.xml" value="0.22974358974358974" />
+        <entry key="..\:/Users/islam/Desktop/News/app/src/main/res/drawable/bg_rounded_top2.xml" value="0.22974358974358974" />
+        <entry key="..\:/Users/islam/Desktop/News/app/src/main/res/drawable/ic_search.xml" value="0.2212962962962963" />
+        <entry key="..\:/Users/islam/Desktop/News/app/src/main/res/drawable/shape_border_gray_transparent_10r.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/islam/Desktop/News/app/src/main/res/layout/details_fragment.xml" value="0.2171875" />
+        <entry key="..\:/Users/islam/Desktop/News/app/src/main/res/layout/item_news.xml" value="0.18888888888888888" />
+        <entry key="..\:/Users/islam/Desktop/News/app/src/main/res/layout/news_list_fragment.xml" value="0.18888888888888888" />
+        <entry key="..\:/Users/islam/Desktop/News/app/src/main/res/menu/details_menu.xml" value="0.2171875" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
