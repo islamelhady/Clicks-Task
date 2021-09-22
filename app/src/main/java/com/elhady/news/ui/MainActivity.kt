@@ -1,7 +1,8 @@
-package com.elhady.news
+package com.elhady.news.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.elhady.news.R
 
 /**
  * Created by islam elhady on 22-Sep-21.
