@@ -11,7 +11,7 @@ import com.elhady.news.databinding.ItemNewsBinding
 /**
  * Created by islam elhady on 23-Sep-21.
  */
-class NewsAdapter() : ListAdapter<Article, NewsAdapter.NewsViewHolder>(DiffCallback) {
+class NewsAdapter(val callback: NewsItemClick) : ListAdapter<Article, NewsAdapter.NewsViewHolder>(DiffCallback) {
 
     /**
      * Callback for calculating the diff between two non-null items in a list.
@@ -35,8 +35,9 @@ class NewsAdapter() : ListAdapter<Article, NewsAdapter.NewsViewHolder>(DiffCallb
     class NewsViewHolder(val viewDataBinding: ItemNewsBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
 
-        fun bind(article: Article) {
+        fun bind(listener: NewsItemClick, article: Article) {
             viewDataBinding.article = article
+            viewDataBinding.itemclick = listener
             viewDataBinding.executePendingBindings()
         }
 
@@ -67,9 +68,17 @@ class NewsAdapter() : ListAdapter<Article, NewsAdapter.NewsViewHolder>(DiffCallb
      */
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         holder.viewDataBinding.also {
-            holder.bind(getItem(position))
+            holder.bind(callback, getItem(position))
         }
     }
+}
 
-
+/**
+ * Click listener for Groups. By giving the block a name it helps a reader understand what it does.
+ */
+class NewsItemClick(val block: (Article) -> Unit) {
+    /**
+     * Called when a item article is clicked
+     */
+    fun onClick(item: Article) = block(item)
 }

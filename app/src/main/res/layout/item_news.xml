@@ -8,6 +8,10 @@
             name="article"
             type="com.elhady.news.data.model.Article" />
 
+        <variable
+            name="itemclick"
+            type="com.elhady.news.ui.newsList.NewsItemClick" />
+
     </data>
 
     <androidx.cardview.widget.CardView
@@ -15,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:background="@color/colorPrimary"
+        android:onClick="@{()-> itemclick.onClick(article)}"
         android:foreground="?attr/selectableItemBackground"
         app:cardBackgroundColor="@color/white"
         android:clickable="true"

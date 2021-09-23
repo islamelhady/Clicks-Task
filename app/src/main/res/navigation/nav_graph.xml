@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/newsListFragment"
         android:name="com.elhady.news.ui.newsList.NewsListFragment"
-        android:label="NewsListFragment" >
+        android:label="NewsListFragment">
         <action
             android:id="@+id/action_newsListFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
@@ -15,5 +15,9 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.elhady.news.ui.details.DetailsFragment"
-        android:label="DetailsFragment" />
+        android:label="DetailsFragment" >
+        <argument
+            android:name="article"
+            app:argType="com.elhady.news.data.model.Article" />
+    </fragment>
 </navigation>

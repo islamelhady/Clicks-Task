@@ -1,6 +1,9 @@
 package com.elhady.news.ui
 
+import android.text.method.LinkMovementMethod
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -19,4 +22,14 @@ fun loadImage(view: AppCompatImageView, url: String?) {
                     .error(R.drawable.placeholder)
             )
             .into(view)
+}
+
+@BindingAdapter("descriptionHtml")
+fun bindDescriptionHtml(view: AppCompatTextView, description: String?) {
+    if (description != null) {
+        view.text = HtmlCompat.fromHtml(description, HtmlCompat.FROM_HTML_MODE_COMPACT)
+        view.movementMethod = LinkMovementMethod.getInstance()
+    } else {
+        view.text = ""
+    }
 }

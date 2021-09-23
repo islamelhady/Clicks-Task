@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.elhady.news.databinding.NewsListFragmentBinding
 import com.elhady.news.utils.State
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.elhady.news.utils.makeToast
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -36,11 +37,18 @@ class NewsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            swipeRefresh.setOnRefreshListener { refreshAllArticles() }
         }
     }
 
     private fun setupAdapter() {
-        adapter = NewsAdapter()
+        adapter = NewsAdapter(NewsItemClick { it ->
+            val toDetailsFragment = it.let {
+                NewsListFragmentDirections.actionNewsListFragmentToDetailsFragment(it)
+            }
+            findNavController().navigate(toDetailsFragment)
+        })
         // Sets the adapter of the RecyclerView
         binding.newsRecycler.adapter = adapter
         postponeEnterTransition()
@@ -62,14 +70,20 @@ class NewsListFragment : Fragment() {
                             makeToast("NO DATA")
                             binding.swipeRefresh.isRefreshing = false
                     }
-                    is State.Error -> makeToast("No Internet")
-
+                    is State.Error -> {
+                        binding.swipeRefresh.isRefreshing = false
+                        makeToast(state.message)
+                    }
                 }
             })
     }
 
     override fun onResume() {
         super.onResume()
+        refreshAllArticles()
+    }
+
+    private fun refreshAllArticles() {
         viewModel.getArticles()
     }
 }
