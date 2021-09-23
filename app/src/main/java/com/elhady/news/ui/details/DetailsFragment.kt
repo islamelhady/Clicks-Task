@@ -3,8 +3,8 @@ package com.elhady.news.ui.details
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.elhady.news.R
 import com.elhady.news.databinding.DetailsFragmentBinding
 
 /**
@@ -21,18 +21,22 @@ class DetailsFragment : Fragment() {
     ): View? {
 
         binding = DetailsFragmentBinding.inflate(inflater)
-        setHasOptionsMenu(true)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.article = args.article
+
+        binding.apply {
+            article = args.article
+            backBtn = this@DetailsFragment
+        }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.details_menu, menu)
+    /**
+     * Navigate to the apply screen to apply job .
+     */
+    fun goToNewsList() {
+        binding.detailsIcBack.setOnClickListener { findNavController().navigateUp() }
     }
-
 }

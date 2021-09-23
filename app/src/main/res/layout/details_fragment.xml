@@ -4,115 +4,105 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="article"
             type="com.elhady.news.data.model.Article" />
 
+        <variable
+            name="backBtn"
+            type="com.elhady.news.ui.details.DetailsFragment" />
+
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/details_ic_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_content_margin_of_layout"
+            android:src="@drawable/ic_share"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimary" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/details_ic_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()-> backBtn.goToNewsList() }"
+            android:padding="@dimen/default_content_margin_of_layout"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimary" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/details_job_image"
             android:layout_width="match_parent"
-            android:background="@color/background"
-            android:layout_height="?attr/actionBarSize"
-            app:elevation="0dp">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:elevation="8dp"
-                app:layout_collapseMode="pin"
-                app:titleTextColor="@color/colorPrimary" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:fitsSystemWindows="true"
-            app:layout_anchor="@id/appbar"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/details_ic_back"
+            app:loadImage="@{article.urlToImage}"
+            tools:src="@drawable/img" />
 
 
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/scroll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/sourceName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_space"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="15dp"
+            android:padding="5dp"
+            android:text="@{article.source.name}"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/details_job_image"
+            tools:text="الاخبار" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+        <TextView
+            android:id="@+id/titleArticle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:padding="5dp"
+            android:text="@{article.title}"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sourceName"
+            tools:text="يفوز علي الهلال السعودي بهدفين مقابل هدف ويحقق لقب السوبر السعودي المصري" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/icImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:loadImage="@{article.urlToImage}"
-                        android:contentDescription="@string/app_name"
-                        android:scaleType="fitXY"
-                        tools:src="@drawable/img" />
+        <TextView
+            android:id="@+id/descriptionArticle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:padding="10dp"
+            android:text="@{article.description}"
+            android:textAlignment="textStart"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleArticle"
+            tools:text="تروج شبكة الايطالية للاستمتاع بالرحلات الليلية في مصر وقالت ان الشركات تقدم العديد من العروض والفرص للاستماتاع بعطلة مريحة علي متن رحلات ليلية والاستماتاع بجمال التهر والانغماس في تاريخ مصر واسرار حياة الفراعنة  " />
 
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="16dp"
-                        android:ellipsize="end"
-                        android:text="@{article.title}"
-                        android:gravity="center_horizontal"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        tools:text="Source Name" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginEnd="16dp"
-                        android:text="@{article.content}"
-                        android:gravity="center_horizontal"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        tools:text="zamalek" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="6dp"
-                        android:layout_marginEnd="16dp"
-                        app:descriptionHtml="@{article.description}"
-                        android:paddingStart="6dp"
-                        android:paddingTop="2dp"
-                        android:paddingEnd="6dp"
-                        android:paddingBottom="2dp"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        tools:text="description" />
-
-                </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            </androidx.core.widget.NestedScrollView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
 
 

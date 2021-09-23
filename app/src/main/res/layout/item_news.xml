@@ -19,11 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:onClick="@{()-> itemclick.onClick(article)}"
         android:foreground="?attr/selectableItemBackground"
         app:cardBackgroundColor="@color/white"
-        android:clickable="true"
-        android:focusable="true"
         app:cardCornerRadius="22dp"
         app:cardElevation="10dp">
 
@@ -31,14 +28,17 @@
             android:id="@+id/item_container_cons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{()-> itemclick.onClick(article)}"
+            android:clickable="true"
+            android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             android:orientation="vertical"
             tools:ignore="UnusedAttribute">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/item_news_poster"
+                android:id="@+id/itemArticlePoster"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="200dp"
                 android:scaleType="matrix"
                 app:loadImage="@{article.urlToImage}"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -46,67 +46,75 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/img" />
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/roundedImageView"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                app:loadImage="@{article.urlToImage}"
+                android:layout_marginEnd="20dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/img"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/item_news_poster" />
+                app:layout_constraintTop_toBottomOf="@+id/itemArticlePoster"
+                app:loadImageCircle="@{article.urlToImage}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/item_article_title"
+                android:id="@+id/itemSourceName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="12dp"
                 android:ellipsize="end"
                 android:padding="4dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:textColor="@color/black"
-                android:text="@{article.author}"
-                android:textSize="8sp"
-                android:textStyle="bold"
+                android:text="@{article.source.name}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="@color/white_5"
+                android:textSize="10sp"
                 app:layout_constraintEnd_toStartOf="@+id/roundedImageView"
-                app:layout_constraintTop_toBottomOf="@id/item_news_poster"
-                tools:text="source" />
+                app:layout_constraintTop_toBottomOf="@id/itemArticlePoster"
+                tools:text="الرياضة" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/item_article_date"
+                android:id="@+id/itemArticleDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="9dp"
                 android:padding="4dp"
                 android:text="@{article.publishedAt}"
-                android:paddingBottom="12dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                android:textColor="@color/black"
+                android:textColor="@color/white_5"
                 android:textSize="8sp"
-                app:layout_constraintEnd_toEndOf="@+id/item_article_title"
-                app:layout_constraintTop_toBottomOf="@id/item_article_title"
+                app:layout_constraintEnd_toEndOf="@+id/itemSourceName"
+                app:layout_constraintTop_toBottomOf="@id/itemSourceName"
                 tools:text="2021-09-22" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/item_title"
+                android:id="@+id/itemArticleTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:paddingEnd="10dp"
-                android:textAlignment="textStart"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:ellipsize="end"
                 android:maxLines="2"
+                android:paddingStart="5dp"
+                android:paddingBottom="5dp"
                 android:text="@{article.title}"
-                android:paddingBottom="12dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 android:textColor="@color/black"
-                android:textSize="10sp"
-                app:layout_constraintEnd_toEndOf="@+id/roundedImageView"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/roundedImageView"
-                tools:text="Zamalek" />
-
+                tools:text="يفوز علي الهلال السعودي بهدفين مقابل هدف ويحقق لقب السوبر السعودي المصري"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>
