@@ -17,7 +17,6 @@ interface ApiService {
 
     companion object {
         const val BASE_URL = "https://newsapi.org/v2/"
-//        const val = "https://newsapi.org/v2/top-headlines?country=eg&apiKey=63b1f94dad044add871d1e319c630265"
     }
 }
 

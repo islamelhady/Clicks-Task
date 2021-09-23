@@ -3,6 +3,7 @@ package com.elhady.news
 import android.app.Application
 import com.elhady.news.di.networkModule
 import com.elhady.news.di.repositoryModule
+import com.elhady.news.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -14,9 +15,10 @@ class App : Application() {
         super.onCreate()
 
         startKoin {
-            androidContext(applicationContext)
+            androidContext(this@App)
             modules(networkModule)
             modules(repositoryModule)
+            modules(viewModelModule)
         }
 
     }
