@@ -33,6 +33,7 @@ class NewsListFragment : Fragment() {
         binding = NewsListFragmentBinding.inflate(inflater)
         setupAdapter()
         setupObservers()
+        binding.swipeRefresh.setOnRefreshListener { refreshAllArticles() }
         return binding.root
     }
 
@@ -41,14 +42,13 @@ class NewsListFragment : Fragment() {
 
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
-            swipeRefresh.setOnRefreshListener { refreshAllArticles() }
         }
         handleSearchMechanism()
     }
 
 
     private fun handleSearchMechanism() {
-        binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
                 return if (!query.isNullOrBlank()) {

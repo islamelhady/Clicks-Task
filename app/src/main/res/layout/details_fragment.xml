@@ -10,7 +10,7 @@
             type="com.elhady.news.data.model.Article" />
 
         <variable
-            name="backBtn"
+            name="detailsIcon"
             type="com.elhady.news.ui.details.DetailsFragment" />
 
     </data>
@@ -20,9 +20,10 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/details_ic_favorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/details_ic_share"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:onClick="@{()-> detailsIcon.shareApp() }"
             android:padding="@dimen/default_content_margin_of_layout"
             android:src="@drawable/ic_share"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,9 +32,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/details_ic_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{()-> backBtn.goToNewsList() }"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:onClick="@{()-> detailsIcon.goToNewsList() }"
             android:padding="@dimen/default_content_margin_of_layout"
             android:src="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,55 +51,64 @@
             app:loadImage="@{article.urlToImage}"
             tools:src="@drawable/img" />
 
-
-        <TextView
-            android:id="@+id/sourceName"
-            android:layout_width="0dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/small_space"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="15dp"
-            android:padding="5dp"
-            android:text="@{article.source.name}"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="15sp"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/details_job_image"
-            tools:text="الاخبار" />
-
-        <TextView
-            android:id="@+id/titleArticle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
-            android:padding="5dp"
-            android:text="@{article.title}"
-            android:textSize="15sp"
-            android:textStyle="bold"
+            android:layout_marginTop="-34dp"
+            android:background="@drawable/bg_rounded_top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sourceName"
-            tools:text="يفوز علي الهلال السعودي بهدفين مقابل هدف ويحقق لقب السوبر السعودي المصري" />
+            app:layout_constraintTop_toBottomOf="@id/details_job_image">
 
-        <TextView
-            android:id="@+id/descriptionArticle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
-            android:padding="10dp"
-            android:text="@{article.description}"
-            android:textAlignment="textStart"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleArticle"
-            tools:text="تروج شبكة الايطالية للاستمتاع بالرحلات الليلية في مصر وقالت ان الشركات تقدم العديد من العروض والفرص للاستماتاع بعطلة مريحة علي متن رحلات ليلية والاستماتاع بجمال التهر والانغماس في تاريخ مصر واسرار حياة الفراعنة  " />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/bg_rounded_bo"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/sourceName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="25dp"
+                    android:padding="5dp"
+                    android:text="@{article.source.name}"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="15sp"
+                    android:textStyle="normal"
+                    tools:text="الاخبار" />
+
+                <TextView
+                    android:id="@+id/titleArticle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="25dp"
+                    android:padding="5dp"
+                    android:text="@{article.title}"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    tools:text="يفوز علي الهلال السعودي بهدفين مقابل هدف ويحقق لقب السوبر السعودي المصري" />
+
+                <TextView
+                    android:id="@+id/descriptionArticle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginEnd="35dp"
+                    android:padding="10dp"
+                    android:text="@{article.description}"
+                    android:textSize="20sp"
+                    tools:text="تروج شبكة الايطالية للاستمتاع بالرحلات الليلية في مصر وقالت ان الشركات تقدم العديد من العروض والفرص للاستماتاع بعطلة مريحة علي متن رحلات ليلية والاستماتاع بجمال التهر والانغماس في تاريخ مصر واسرار حياة الفراعنة  " />
+
+
+            </LinearLayout>
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

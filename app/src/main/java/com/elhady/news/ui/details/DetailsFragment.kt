@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.elhady.news.databinding.DetailsFragmentBinding
+import com.elhady.news.utils.makeToast
 
 /**
  * Created by islam elhady on 22-Sep-21.
@@ -29,14 +30,20 @@ class DetailsFragment : Fragment() {
 
         binding.apply {
             article = args.article
-            backBtn = this@DetailsFragment
+            detailsIcon = this@DetailsFragment
         }
     }
 
     /**
-     * Navigate to the apply screen to apply job .
+     * Navigate to home screen .
      */
     fun goToNewsList() {
         binding.detailsIcBack.setOnClickListener { findNavController().navigateUp() }
+    }
+    /**
+     * Navigate to share .
+     */
+    fun shareApp(){
+        makeToast("Share App")
     }
 }
