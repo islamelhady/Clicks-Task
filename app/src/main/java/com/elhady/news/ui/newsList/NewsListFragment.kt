@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
 import com.elhady.news.databinding.NewsListFragmentBinding
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -42,40 +41,23 @@ class NewsListFragment : Fragment() {
 
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
+            searchIV.setOnClickListener {
+                hide(searchIV)
+                show(backImage, searchResultsET)
+            }
+
+            backImage.setOnClickListener {
+                show(searchIV)
+                hide(backImage, searchResultsET)
+                searchResultsET.clear()
+            }
+
+            searchResultsET.afterTextChanged {
+                filter(it)
+            }
         }
-        handleSearchMechanism()
     }
 
-
-    private fun handleSearchMechanism() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-
-                return if (!query.isNullOrBlank()) {
-                    filter(query)
-                    false
-                } else {
-                    refreshAllArticles()
-                    true
-                }
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return if (!newText.isNullOrBlank()) {
-                    filter(newText)
-                    false
-                } else {
-                    refreshAllArticles()
-                    true
-                }
-            }
-
-        })
-    }
-
-    private fun populateFullList() {
-        adapter?.submitList(newsList)
-    }
 
     private fun filter(text: String) {
         val filteredList: ArrayList<Article> = ArrayList()
@@ -112,11 +94,13 @@ class NewsListFragment : Fragment() {
             when (state) {
                 is State.Loading -> binding.swipeRefresh.isRefreshing = true
                 is State.Success -> {
-                    if (state.data.articles?.isNotEmpty()!!)
-                        adapter?.submitList(state.data.articles)
+                    newsList.clear()
+                    newsList.addAll(state.data?.articles?.toMutableList()!!)
+                    if (binding.searchResultsET.visibility == View.VISIBLE)
+                        filter(binding.searchResultsET.text.toString())
                     else
-                        makeToast("NO DATA")
-                    binding.swipeRefresh.isRefreshing = false
+                        adapter?.submitList(newsList)
+                        binding.swipeRefresh.isRefreshing = false
                 }
                 is State.Error -> {
                     binding.swipeRefresh.isRefreshing = false
